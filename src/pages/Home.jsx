@@ -11,19 +11,21 @@ function Home() {
     addTransaction,
     setAddTransaction,
     income,
+    setIncome,
     expense,
+    setExpense,
     description,
+    setDescription,
     totalIncome,
     setTotalIncome,
     totalExpense,
     setTotalExpense,
   } = useContext(GlobalContext);
-  let balance = 0;
   const [allIncomeTransaction, setAllIncomeTransaction] = useState([]);
   const [allExpenseTransaction, setAllExpenseTransaction] = useState([]);
-  balance = totalIncome - totalExpense;
+  let balance = totalIncome - totalExpense;
 
-  const ref = useRef();
+  const ref = useRef(null);
 
   
 
@@ -36,6 +38,7 @@ function Home() {
       };
       setAllIncomeTransaction((prev) => [...prev, newTransaction]);
       setTotalIncome((prev) => prev + income);
+
     }
     if (expense > 0) {
       const newTransaction = {
@@ -46,7 +49,12 @@ function Home() {
       setAllExpenseTransaction((prev) => [...prev, newTransaction]);
       setTotalExpense((prev) => prev + expense);
     }
+    setIncome(0);
+    setExpense(0);
+    setDescription("");
   }, [income, expense]);
+  // console.log(allIncomeTransaction,totalIncome);
+  
 
   useCLickOutSide(ref, () => setAddTransaction(false));
 

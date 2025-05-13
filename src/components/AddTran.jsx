@@ -5,31 +5,32 @@ const AddTran = React.forwardRef((props, ref) => {
   const {
     addTransaction,
     setAddTransaction,
+    income,
     setIncome,
+    expense,
     setExpense,
     setDescription,
     transactionType,
     setTransactionType,
   } = useContext(GlobalContext);
-  const [tempValue,setTempValue] = useState(0)
+  const [tempValue, setTempValue] = useState(0);
 
-
-  function handleTranType(e){
+  function handleTranType(e) {
     const tranType = e.target.id;
     setTransactionType(tranType);
   }
   const amount = Number(tempValue);
-    function handleSubmit(e){
-        e.preventDefault();
-        if(transactionType === "inc"){
-            setExpense(0)
-            setIncome(amount);
-        }else if(transactionType === "epx"){
-            setIncome(0)
-            setExpense(amount);
-        }
-        setAddTransaction(!addTransaction);
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (transactionType === "inc") {
+      setExpense(0);
+      setIncome(amount);
+    } else if (transactionType === "epx") {
+      setIncome(0);
+      setExpense(amount);
     }
+    setAddTransaction(!addTransaction);
+  }
 
   return (
     <div className="fixed inset-0 bg-black/60">
@@ -88,9 +89,10 @@ const AddTran = React.forwardRef((props, ref) => {
           >
             Cancel
           </button>
-          <button 
-          onClick={handleSubmit}
-          className="py-2 px-4 bg-gray-300 cursor-pointer hover:bg-gray-400 rounded-lg">
+          <button
+            onClick={handleSubmit}
+            className="py-2 px-4 bg-gray-300 cursor-pointer hover:bg-gray-400 rounded-lg"
+          >
             Add
           </button>
         </div>
